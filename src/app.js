@@ -1,5 +1,6 @@
 const express = require('express');
 const history = require('connect-history-api-fallback');
+const routes = require('./router/index');
 
 const app = new express();
 
@@ -25,8 +26,10 @@ app.all('*', (request, response, next) => {
     }
 });
 
-app.use(history());
+routes(app);
 
+app.use(history());
+app.use(express.static('./public'));
 app.listen(3000, () => {
     console.log(`start run express app project .... port: ${3000}`);
 });
