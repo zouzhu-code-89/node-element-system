@@ -10,7 +10,9 @@
   "author": "zouzhuQcom@163.com",
   "license": "ISC",
   "dependencies": {
+    "babel-register": "^6.26.0",
     "connect-history-api-fallback": "^1.6.0",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "formidable": "^1.2.2"
   }
