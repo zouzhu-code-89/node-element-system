@@ -4,10 +4,13 @@
  * @author zouzhuQcom@163.com
  * @time   2020-04-11
  */
+const v1 = require('./v1');
 const v2 = require("./v2");
+
 
 const routes = (app) => {
     app.use('/v2', v2);
+    app.use('/v1', v1);
 }
 
 module.exports = routes;
