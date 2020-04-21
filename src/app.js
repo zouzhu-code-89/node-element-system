@@ -1,9 +1,13 @@
 const express = require('express');
+const db = require('./mongodb/db');
+const cookie=require('cookie-parser');
+const chalk = require('chalk');
 const history = require('connect-history-api-fallback');
 const routes = require('./router/index');
+require('./mongodb/test');
 
 const app = new express();
-
+app.use(cookie());
 
 /**
  * all路由的路口,所有请求都将到达这里,并设置统一的响应头
@@ -28,8 +32,9 @@ app.all('*', (request, response, next) => {
 
 routes(app);
 
+
 app.use(history());
 app.use(express.static('./public'));
 app.listen(3000, () => {
-    console.log(`start run express app project .... port: ${3000}`);
+    console.log(chalk.blue(`start run express app project .... port: ${3000}`));
 });

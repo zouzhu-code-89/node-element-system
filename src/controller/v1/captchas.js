@@ -8,6 +8,7 @@
 
 const captchapng = require('captchapng');
 
+
 class Captchas{
     constructor(){
 
@@ -21,6 +22,7 @@ class Captchas{
      * @param {*} next      下一个中间件
      */
     async getCaptchas(request, response, next){
+        console.log("获取图形验证码 .....");
         // 生成一个随机数
         const cap = parseInt(Math.random()*9000+1000);
         // 图片的宽度、图片的高度、随机数字
@@ -32,7 +34,7 @@ class Captchas{
         // 转换成base64
         const base64 = p.getBase64();
         // 将生成的验证码数字和过期时间发送到COOKIE
-        response.cookie('cap', cap, { maxAge: 300000, httpOnly: true });
+        response.cookie('cap', cap);
         // img标签能渲染base64编码的图片
         response.send({
             status: 1,

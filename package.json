@@ -12,9 +12,16 @@
   "dependencies": {
     "babel-register": "^6.26.0",
     "captchapng": "0.0.1",
+    "chalk": "^4.0.0",
+    "config-lite": "^3.0.0",
     "connect-history-api-fallback": "^1.6.0",
+    "cookie-parser": "^1.4.5",
     "crypto": "^1.0.1",
     "express": "^4.17.1",
-    "formidable": "^1.2.2"
+    "formidable": "^1.2.2",
+    "mongoose": "^5.9.9",
+    "node-fetch": "^2.6.0",
+    "qiniu": "^7.3.0",
+    "util": "^0.12.2"
   }
 }

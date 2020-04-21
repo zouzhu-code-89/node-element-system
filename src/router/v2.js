@@ -5,13 +5,13 @@
  * @time   2020-04-11
  */
 const express = require('express');
-const User = require('../controller/v2/user');
+const user = require('../controller/v2/user');
 
 const router = express.Router();
 
 // router.get('/index_entry', Entry.getEntry);
 // router.get('/pois/:geohash', CityHandle.pois);
-router.post('/login', User.login);                         // 用户登录
+router.post('/login', user.login);                         // 用户登录
 //router.get('/signout', User.signout);                      // 用户退出
 // router.post('/changepassword', User.chanegPassword);
 

@@ -6,11 +6,15 @@
  * @time   2020-04-12
  */
 const express = require('express');
+const CityHandle = require('../controller/v1/cities');
 const Captchas = require('../controller/v1/captchas');
 
 const router = express.Router();
 
-router.get('/captchas', Captchas.getCaptchas);               // 获取验证码
+
+
+router.get('/cities', CityHandle.getCity);         // 获取全部城市数据(精准定位、热门城市、字母排序城市)
+router.post('/captchas', Captchas.getCaptchas);     // 获取验证码(图形验证码)
 
 
 module.exports = router;

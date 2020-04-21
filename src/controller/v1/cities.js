@@ -22,36 +22,40 @@ class CityHandle{
      * @param {*} next 
      */
     async getCity(request, response, next){
+        console.log("/getCity : ....");
         // 获取GET请求参数City的类型
-        const type = request.query.type; 
-        let cityInfo;
-        try {
-            switch (type){
-                // 精准定位用户
-                case 'guess':       
-                    const city = await this.getCityName(request);
-                    cityInfo = await Cities.cityGuess(city);
-                    break;
-                // 热门城市
-                case 'hot':
-                    cityInfo = await Cities.cityHot();
-                    break;
-                // 按字母排序城市
-                case 'group':
-                    cityInfo = await Cities.cityGroup();
-                    break;
-                default:
-                    response.json({
-                        name: 'ERROR_QUERY_TYPE',
-                        message: '参数错误'
-                    })
-            }
-        }catch(err){
-            response.send({
-                name: 'ERROR_DATA',
-                message: '获取数据失败'
-            });
-        }
+        // const type = request.query.type; 
+        // let cityInfo;
+        // try {
+        //     switch (type){
+        //         // 精准定位用户
+        //         case 'guess':       
+        //             const city = await this.getCityName(request);
+        //             cityInfo = await Cities.cityGuess(city);
+        //             break;
+        //         // 热门城市
+        //         case 'hot':
+        //             cityInfo = await Cities.cityHot();
+        //             break;
+        //         // 按字母排序城市
+        //         case 'group':
+        //             cityInfo = await Cities.cityGroup();
+        //             break;
+        //         default:
+        //             response.json({
+        //                 name: 'ERROR_QUERY_TYPE',
+        //                 message: '参数错误'
+        //             })
+        //     }
+        // }catch(err){
+        //     response.send({
+        //         name: 'ERROR_DATA',
+        //         message: '获取数据失败'
+        //     });
+        // }
     }
 
 }
+
+
+module.exports = new CityHandle();
