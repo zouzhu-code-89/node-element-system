@@ -6,7 +6,9 @@
  * @time   2020-04-12
  */
 'use strict'
-const AddressComponent = require("../../prototype/addressComponent");
+import AddressComponent from "../../prototype/addressComponent";
+import pinyin from "pinyin";
+import Cities from '../../models/v1/cities'
 
 
 class CityHandle extends AddressComponent{
@@ -26,28 +28,22 @@ class CityHandle extends AddressComponent{
      * @return {String} option 城市名称
      */
 	async getCityName(req){
-        console.log("getCityName ------");
 		try{
 			const cityInfo = await this.guessPosition(req);
-			/*
-			汉字转换成拼音
-			 */
-	    const pinyinArr = pinyin(cityInfo.city, {
-		  	style: pinyin.STYLE_NORMAL,
+			// 汉字转换成拼音
+	    	const pinyinArr = pinyin(cityInfo.city, {
+		  		style: pinyin.STYLE_NORMAL,
 			});
 			let cityName = '';
-			pinyinArr.forEach(item => {
+			pinyinArr.forEach(item => {			// [ [ 'shang' ], [ 'hai' ] ]
 				cityName += item[0];
 			})
-			return cityName;
+			return cityName;					// shanghai
 		}catch(err){
 			return '北京';
 		}
 	}
 
-    testCity(){
-        console.log("hahahah ......");
-    }
 
     /**获取城市数据
      *
@@ -65,17 +61,18 @@ class CityHandle extends AddressComponent{
 			switch (type) {
 				case 'guess': {
 					const city = await this.getCityName(request);
-                    // cityInfo = await Cities.cityGuess(city);
+					console.log(city);
+                    cityInfo = await Cities.cityGuess(city);
 				}
-				case 'hot': {
-					console.log(".......", type);
-				}
-				case 'group': {
-					console.log(".......", type);
-				}
-				default: {
-					console.log(".......", type);
-				}
+				// case 'hot': {
+				// 	console.log(".......", type);
+				// }
+				// case 'group': {
+				// 	console.log(".......", type);
+				// }
+				// default: {
+				// 	console.log(".......", type);
+				// }
 					
 			}
 		} catch(e) {

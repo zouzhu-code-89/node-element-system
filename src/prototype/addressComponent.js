@@ -5,7 +5,8 @@
  * 	@fileoverview 当需要获取地理位置相关的数据时则调用这个类里面相关的方法
  *  @time 2020-04-21
  */
-const BaseComponent = require('./baseComponent');
+import BaseComponent from './baseComponent';
+import api from '../api'
 
 
 class AddressComponent extends BaseComponent {
@@ -14,11 +15,7 @@ class AddressComponent extends BaseComponent {
 		 * @param {String} tencenkey 腾讯地图开发者钥匙，只有是开发者才能使用它的接口
 		 */
 		super();
-		this.tencentkey = 'RLHBZ-WMPRP-Q3JDS-V2IQA-JNRFH-EJBHL';
-		this.tencentkey2 = 'RRXBZ-WC6KF-ZQSJT-N2QU7-T5QIT-6KF5X';
-		this.tencentkey3 = 'OHTBZ-7IFRG-JG2QF-IHFUK-XTTK6-VXFBN';
-		this.tencentkey4 = 'Z2BBZ-QBSKJ-DFUFG-FDGT3-4JRYV-JKF5O';
-		this.baidukey = 'fjke3YUipM9N64GdOIh1DNeK2APO2WcT';
+		this.tencentkey = '5WTBZ-2CGWW-GYORE-OUKPL-US4JV-B2F2N';
 	}
 	
 	
@@ -52,37 +49,18 @@ class AddressComponent extends BaseComponent {
 			console.log("guess position : " + ip);
 			// 通过腾讯的接口获取用户当前的位置信息，当返回状态不是0时，重复对接口发起请求，这里设计者可能认为是开发者密钥的原因
 	 		try{
-		 		let result = await this.fetch('http://apis.map.qq.com/ws/location/v1/ip', {
+		 		let result = await api('http://apis.map.qq.com/ws/location/v1/ip', {
 		 			ip,
 		 			key: this.tencentkey,
-		 		})
-		 		if (result.status != 0) {
-		 			result = await this.fetch('http://apis.map.qq.com/ws/location/v1/ip', {
-			 			ip,
-			 			key: this.tencentkey2,
-			 		})
-		 		}
-		 		if (result.status != 0) {
-		 			result = await this.fetch('http://apis.map.qq.com/ws/location/v1/ip', {
-			 			ip,
-			 			key: this.tencentkey3,
-			 		})
-		 		}
-		 		if (result.status != 0) {
-		 			result = await this.fetch('http://apis.map.qq.com/ws/location/v1/ip', {
-			 			ip,
-			 			key: this.tencentkey4,
-			 		})
-				 }
+				 });
 				// 当状态返回成功时，说明我们成功获取到了定位的JSON数据，然后我们进一步处理 resolve 返回
 		 		if (result.status == 0) {
-		 			const cityInfo = {
-		 				lat: result.result.location.lat,
-		 				lng: result.result.location.lng,
-		 				city: result.result.ad_info.city,
-		 			}
-		 			cityInfo.city = cityInfo.city.replace(/市$/, '');
-		 			resolve(cityInfo)
+		 			let cityInfo = {
+		 				"lat": result.result.location.lat,
+		 				"lng": result.result.location.lng,
+		 				"city": result.result.ad_info.city.replace(/市$/, '')
+					 };
+					resolve(cityInfo);
 		 		}else{
 		 			console.log('定位失败', result)
 		 			reject('定位失败');

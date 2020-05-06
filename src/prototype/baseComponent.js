@@ -36,60 +36,6 @@ module.exports = class BaseComponent {
     }
 
 
-    /** fetch 发送请求
-     *  @method fetch
-     *  @description 这个函数是对fetch库的封装
-     *  @param {*} url            请求的路径
-     *  @param {*} data           请求的数据
-     *  @param {*} type           请求的类型
-     *  @param {*} responseDataType   请求响应的数据类型
-     */
-    async fetch(url = '', data = {}, type = 'GET', responseType = "JSON"){
-		console.log("获取定位 ..........");
-        type = type.toUpperCase();
-        responseType = responseType.toUpperCase();
-        // GET 请求拼接完整的 URL
-        if (type == 'GET') {
-            let dataStr = '';     
-            Object.keys(data).forEach(key => {
-                dataStr += key + "=" + data[key] + '&';
-            })
-        
-            if (dataStr !== '') {
-                dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'));
-                url = url + '?' + dataStr;
-            }
-        }
-        // 请求配置
-        let requestConfig = {
-            method: type,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }
-        // 如果为POST请求、则在requestConfig对象上在添加一个属性
-        if (type == 'POST') {
-            Object.defineProperty(requestConfig, 'body', {
-                value: JSON.stringify(data)
-            })
-        }
-        // 判断返回的数据类型是 text or json
-        let responseJson;
-        try {
-            const response = await fetch(url, requestConfig);
-            if (responseType === 'TEXT') {
-                responseJson = await response.text();
-            } else {
-                responseJson = await response.json();
-            }
-        } catch (error) {
-            console.log("获取http数据失败", error);
-            throw new Error(err);
-        }
-        return responseJson;
-    }
-
 
     /** ID列表获取
      *  @method getId

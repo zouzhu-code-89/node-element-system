@@ -9,15 +9,18 @@ import http from './http';
   * @param {*} data 
   */
 const todos = async (url, data = {}, type = 'GET') => {
-    type = type.toUpperCase();
+    return new Promise(function(resolve, reject){
+        type = type.toUpperCase();
 
-    if (url) {
-        if (type == "GET") {
-            await requestGetUrlParam(url, data);
-        } else {
-            console.log("功能暂时还未写 .........");
+        if (url) {
+            if (type == "GET") {
+                const resData = requestGetUrlParam(url, data);
+                resolve(resData);
+            } else {
+                console.log("功能暂时还未写 .........");
+            }
         }
-    }
+    });
 }
 
 
@@ -27,19 +30,19 @@ const todos = async (url, data = {}, type = 'GET') => {
  * @param {*} data 
  */
 async function requestGetUrlParam(url, data){
-    let paramUrl = '';
-    Object.keys(data).forEach(key => {
-        paramUrl += `${key}=${data[key]}&`; 
-    });   
-    paramUrl = paramUrl.substr(0, paramUrl.lastIndexOf('&'));
-    url += `?${paramUrl}`;
+    return new Promise(function(resolve, reject){
+        let paramUrl = '';
+        Object.keys(data).forEach(key => {
+            paramUrl += `${key}=${data[key]}&`; 
+        });   
+        paramUrl = paramUrl.substr(0, paramUrl.lastIndexOf('&'));
+        url += `?${paramUrl}`;
     
-    console.log("url: " + url);
+        console.log("url: " + url);
 
-    http.get(url).then(function(response){
-        console.log('腾讯地图服务器响应了 ..........');
-        console.log(response.data);
-        return response.data;
+        http.get(url).then(function(response){
+            resolve(response.data);
+        });
     });
 }
 
