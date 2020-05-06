@@ -33,20 +33,23 @@ class AddressComponent extends BaseComponent {
 			// 开发模式下使用固定的默认IP地址，只有在生产模式下才会获取用户的IP地址
 			let ip;
 			const defaultIp = '180.158.102.141';
+			console.log(process.env.NODE_ENV);
 	 		if (process.env.NODE_ENV == 'development') {
 	 			ip = defaultIp;
 	 		} else {
 	 			try {
-					ip = request.headers['x-forwarded-for'] || 
-			 		request.connection.remoteAddress || 
-			 		request.socket.remoteAddress ||
-			 		request.connection.socket.remoteAddress;
-			 		const ipArr = ip.split(':');
-			 		ip = ipArr[ipArr.length -1] || defaultIp;
+					// ip = request.headers['x-forwarded-for'] || 
+			 		// request.connection.remoteAddress || 
+			 		// request.socket.remoteAddress ||
+			 		// request.connection.socket.remoteAddress;
+			 		// const ipArr = ip.split(':');
+					 // ip = ipArr[ipArr.length -1] || defaultIp;
+					 ip = defaultIp;
 				} catch (e) {
 					ip = defaultIp;
 				}
 			 }
+			console.log("guess position : " + ip);
 			// 通过腾讯的接口获取用户当前的位置信息，当返回状态不是0时，重复对接口发起请求，这里设计者可能认为是开发者密钥的原因
 	 		try{
 		 		let result = await this.fetch('http://apis.map.qq.com/ws/location/v1/ip', {

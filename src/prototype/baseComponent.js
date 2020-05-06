@@ -45,6 +45,7 @@ module.exports = class BaseComponent {
      *  @param {*} responseDataType   请求响应的数据类型
      */
     async fetch(url = '', data = {}, type = 'GET', responseType = "JSON"){
+		console.log("获取定位 ..........");
         type = type.toUpperCase();
         responseType = responseType.toUpperCase();
         // GET 请求拼接完整的 URL

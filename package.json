@@ -4,12 +4,14 @@
   "description": "this a node system",
   "main": "main.js",
   "scripts": {
-    "start": "supervisor main.js",
+    "start": "set NODE_ENV=development && node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "zouzhuQcom@163.com",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
+    "babel-polyfill": "^6.26.0",
     "babel-register": "^6.26.0",
     "captchapng": "0.0.1",
     "chalk": "^4.0.0",
@@ -23,5 +25,8 @@
     "node-fetch": "^2.6.0",
     "qiniu": "^7.3.0",
     "util": "^0.12.2"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1"
   }
 }
