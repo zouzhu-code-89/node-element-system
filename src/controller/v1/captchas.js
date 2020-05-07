@@ -1,6 +1,5 @@
 /**
  * @fileoverview 图形验证码生成器
- * 
  * @author zouzhuQcom@163.com
  * @time   2020-04-12
  */

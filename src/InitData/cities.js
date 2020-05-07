@@ -1,38 +1,38 @@
 export default {
 S: [
-{
-id: 1,
-name: "上海",
-abbr: "SH",
-area_code: "021",
-sort: 1,
-latitude: 31.23037,
-longitude: 121.473701,
-is_map: true,
-pinyin: "shanghai"
-},
-{
-id: 31,
-name: "石家庄",
-abbr: "SJZ",
-area_code: "0311",
-sort: 17,
-latitude: 38.042759,
-longitude: 114.514297,
-is_map: true,
-pinyin: "shijiazhuang"
-},
-{
-id: 401,
-name: "三门峡",
-abbr: "SMX",
-area_code: "0398",
-sort: 1900,
-latitude: 34.77261,
-longitude: 111.200302,
-is_map: true,
-pinyin: "sanmenxia"
-},
+        {
+            id: 1,
+            name: "上海",
+            abbr: "SH",
+            area_code: "021",
+            sort: 1,
+            latitude: 31.23037,
+            longitude: 121.473701,
+            is_map: true,
+            pinyin: "shanghai"
+        },
+        {
+            id: 31,
+            name: "石家庄",
+            abbr: "SJZ",
+            area_code: "0311",
+            sort: 17,
+            latitude: 38.042759,
+            longitude: 114.514297,
+            is_map: true,
+            pinyin: "shijiazhuang"
+        },
+        {
+            id: 401,
+            name: "三门峡",
+            abbr: "SMX",
+            area_code: "0398",
+            sort: 1900,
+            latitude: 34.77261,
+            longitude: 111.200302,
+            is_map: true,
+            pinyin: "sanmenxia"
+        },
 {
 id: 8,
 name: "苏州",

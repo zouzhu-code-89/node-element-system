@@ -56,68 +56,53 @@ class CityHandle extends AddressComponent{
         // 获取GET请求参数City的类型
         const type = request.query.type; 
 		let cityInfo;
-		
 		try {
 			switch (type) {
 				case 'guess': {
-					const city = await this.getCityName(request);
-					console.log(city);
-                    cityInfo = await Cities.cityGuess(city);
+					// 获取城市的拼音名字
+					const city = await this.getCityName(request);	
+					// 数据库中查询用户所在的城市信息
+					cityInfo = await Cities.cityGuess(city);
+					break;
 				}
-				// case 'hot': {
-				// 	console.log(".......", type);
-				// }
-				// case 'group': {
-				// 	console.log(".......", type);
-				// }
-				// default: {
-				// 	console.log(".......", type);
-				// }
-					
+				case 'hot': {
+					// 数据库中查询当前热门的城市信息
+					cityInfo = await Cities.cityHot();
+					break;
+				}
+				case 'group': {
+					// 数据库中查询城市信息，按字母排序
+					cityInfo = await Cities.cityGroup();
+					break;
+				}
+				default: {
+					response.json({
+						name: 'ERROR_QUERY_TYPE',
+						message: '参数错误',
+					})
+					return;
+				}
 			}
+			response.send(cityInfo);
 		} catch(e) {
-			
+			response.send({
+				name: 'ERROR_DATA',
+				message: '获取数据失败'
+			});
 		}
-        // try {
-        //     switch (type){
-        //         // 精准定位用户
-        //         case 'guess':  
-        //             console.log("type : ->" ,this.name);
-        //             // console.log("guess ....." + this.name);  
-        //             // const city = await this.getCityName(request);
-        //             // cityInfo = await Cities.cityGuess(city);
-        //             break;
-        //         // 热门城市
-        //         case 'hot':
-        //             cityInfo = await Cities.cityHot();
-        //             break;
-        //         // 按字母排序城市
-        //         case 'group':
-        //             cityInfo = await Cities.cityGroup();
-        //             break;
-        //         default:
-        //             response.json({
-        //                 name: 'ERROR_QUERY_TYPE',
-        //                 message: '参数错误'
-        //             })
-        //     }
-        // }catch(err){
-        //     response.send({
-        //         name: 'ERROR_DATA',
-        //         message: '获取数据失败'
-        //     });
-        // }
     }
 
 
-
-
-
-
-
-
+	/**根据ID查询城市数据
+	 * @description 根据城市数据文档的主键ID,精准的查询到城市信息.
+	 * @param {*} req 
+	 * @param {*} res 
+	 * @param {*} next 
+	 * @return {obj} cityInfo
+	 */
     async getCityById(req, res, next){
 		const cityid = req.params.id;
+		console.log("getCityById 请求到来了.......",cityid);
 		if (isNaN(cityid)) {
 			res.json({
 				name: 'ERROR_PARAM_TYPE',

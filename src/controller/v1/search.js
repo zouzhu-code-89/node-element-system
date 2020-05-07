@@ -1,5 +1,7 @@
 'use strict';
-
+/**
+ * 
+ */
 import AddressComponent from '../../prototype/addressComponent';
 import Cities from '../../models/v1/cities';
 import CityHandle from './cities'
